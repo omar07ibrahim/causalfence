@@ -115,7 +115,7 @@ It does not prove a database implementation, SLA, performance, or production cor
 <p><strong>{summary["trace_edges"]}</strong> trace edges · <strong>{summary["version_edges"]}</strong> declared version edges</p></section></div>
 <section id="timeline"><h2>Incident timeline</h2><p class="sub">Red ticks have at least one bounded witness.</p>
 <div class="timeline">{timeline}</div></section>
-<section id="findings"><h2>Minimal local witnesses</h2><p class="sub">Each finding names the operation pair and missing version needed for independent replay.</p>
+<section id="findings"><h2>Bounded local witnesses</h2><p class="sub">Each finding names the relevant operation sequence and missing version(s) needed for independent replay.</p>
 <div class="table-wrap"><table><thead><tr><th>ID</th><th>Guarantee</th><th>At</th><th>Witness</th><th>Explanation</th></tr></thead>
 <tbody>{finding_rows}</tbody></table></div></section>
 <section id="trace"><h2>Normalized trace</h2><p class="sub">Strict input order, declared context, and observed versions.</p>

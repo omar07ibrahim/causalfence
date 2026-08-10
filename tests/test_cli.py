@@ -7,7 +7,10 @@ from pathlib import Path
 import pytest
 from conftest import SCENARIO
 
+from causalfence.canonical import MAX_TRACE_BYTES, load_json
 from causalfence.cli import main
+from causalfence.engine import analyze_document
+from causalfence.report import render_report
 
 
 def test_complete_cli_workflow(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
@@ -35,6 +38,14 @@ def test_complete_cli_workflow(tmp_path: Path, capsys: pytest.CaptureFixture[str
     assert "Floyd–Warshall verifier passed" in html
     assert "synthetic fixture" in html
     assert str(tmp_path) not in html
+
+
+def test_report_claims_only_bounded_witnesses() -> None:
+    trace = load_json(SCENARIO, max_bytes=MAX_TRACE_BYTES)
+    html = render_report(analyze_document(trace))
+
+    assert "Bounded local witnesses" in html
+    assert "Minimal local witnesses" not in html
 
 
 def test_analyze_refuses_to_overwrite(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
