@@ -125,8 +125,8 @@
     "violating_events": 5,
     "writes": 8
   },
-  "source_revision": "648802497150b59a7422c1a71354413ca9ba1d8b",
-  "source_tree": "e2abb080e46c0ea480be400695fa0061e62b1f5a",
+  "source_revision": "28c2228e9885a59cf45fdcec8a10f5c724db7d65",
+  "source_tree": "fc10ad41bd2f0c997ecdf586bef8ecf70099723d",
   "sources": [
     {
       "bytes": 8004,
@@ -164,9 +164,9 @@
       "sha256": "8f6a9972b8ddfbb915837bcf4858b279c2fcb6ce36d22409d2bb30906a52c599"
     },
     {
-      "bytes": 27975,
+      "bytes": 27961,
       "path": "tools/capture_evidence.py",
-      "sha256": "00947a262ce8c34498c3fe1c69148a1471f54a53f5617462d54c1275d631a515"
+      "sha256": "9989ae3b61c72d750f5e6ad5bf3ad662ee437925f72c9de8219ed5b9478323c5"
     },
     {
       "bytes": 240,
