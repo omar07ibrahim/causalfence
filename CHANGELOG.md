@@ -18,7 +18,7 @@ All notable changes to CausalFence are documented here. The format follows
 - Independent Floyd–Warshall receipt verifier.
 - Offline CLI for analyze, verify, inspect, and self-contained HTML report.
 - Synthetic 16-event multi-region fixture with nine replayable findings.
-- 59-test suite with 97.78% measured line coverage and CPython 3.11–3.14
+- 60-test suite with 97.78% measured line coverage and CPython 3.11–3.14
   compatibility.
 - Reproducible desktop, mobile, CLI, diagram, chart, GIF, HTML, JSON, and
   manifest evidence.

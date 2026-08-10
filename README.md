@@ -47,7 +47,7 @@ histories.
 | Regions / sessions | 3 / 5 |
 | Declared version edges / complete trace edges | 5 / 26 |
 | Findings / affected events / conformant events | 9 / 5 / 11 |
-| Test suite | 59 tests |
+| Test suite | 60 tests |
 | Measured line coverage | 97.78% |
 | Python compatibility | 3.11.15, 3.12.13, 3.13.14, 3.14.6 |
 
