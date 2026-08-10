@@ -5,7 +5,6 @@ type: software
 authors:
   - family-names: "Ibrahim"
     given-names: "Omar"
-    orcid: "https://orcid.org/0009-0005-9757-7981"
 repository-code: "https://github.com/omar07ibrahim/causalfence"
 url: "https://github.com/omar07ibrahim/causalfence"
 version: "0.1.0"
