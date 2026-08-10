@@ -1,0 +1,74 @@
+{
+  "format": "causalfence.legacy-tree.v1",
+  "source_repository": "omar07ibrahim/test1",
+  "source_commit": "1539c298736daa101bd13cf4329238971c45b988",
+  "captured_at": "2026-08-10",
+  "files": [
+    {
+      "path": "constants.py",
+      "mode": "100644",
+      "bytes": 80,
+      "blob_sha1": "8dec64e27811c82dc203261dccc558bebbb84713"
+    },
+    {
+      "path": "database.py",
+      "mode": "100644",
+      "bytes": 14293,
+      "blob_sha1": "c6d989c00b8b59e122cb97d2043ca4da83f6d97b"
+    },
+    {
+      "path": "DTKLPR5.py",
+      "mode": "100644",
+      "bytes": 41509,
+      "blob_sha1": "62e7815807bcae5b9f12a56c926ae2db7068f413"
+    },
+    {
+      "path": "DTKVID.py",
+      "mode": "100644",
+      "bytes": 8535,
+      "blob_sha1": "aee7303163a75a6461abdb9977209a53e5af6015"
+    },
+    {
+      "path": "main.py",
+      "mode": "100644",
+      "bytes": 9990,
+      "blob_sha1": "a7cfc0662b045b3244e87cf46489bd89b79ca5b2"
+    },
+    {
+      "path": "processing_manager.py",
+      "mode": "100644",
+      "bytes": 5603,
+      "blob_sha1": "f219f8f5ce228c4b9e0d4ca9be71d312e3f75435"
+    },
+    {
+      "path": "progress_frame.py",
+      "mode": "100644",
+      "bytes": 7431,
+      "blob_sha1": "5d0b1511f86f8154c674a08af1b070bb73aa8695"
+    },
+    {
+      "path": "report_panel.py",
+      "mode": "100644",
+      "bytes": 24592,
+      "blob_sha1": "753642e9c9c991bd6027d2524001073fdda82dcc"
+    },
+    {
+      "path": "settings_dialog.py",
+      "mode": "100644",
+      "bytes": 8375,
+      "blob_sha1": "726caf1cf14d01c60b33716554f8f307dd7fdb9c"
+    },
+    {
+      "path": "utils.py",
+      "mode": "100644",
+      "bytes": 1575,
+      "blob_sha1": "ffed3c4fe4480fec9ee7e4b696cb3e17026a15a4"
+    },
+    {
+      "path": "video_processor.py",
+      "mode": "100644",
+      "bytes": 13834,
+      "blob_sha1": "6e3b6db75bdb56407c948ec1d4024d9f31698d77"
+    }
+  ]
+}
