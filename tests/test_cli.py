@@ -5,9 +5,9 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+from conftest import SCENARIO
 
 from causalfence.cli import main
-from conftest import SCENARIO
 
 
 def test_complete_cli_workflow(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:

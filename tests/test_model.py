@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import cast
 
 import pytest
+from conftest import cloned
 
 from causalfence.errors import ContractError
 from causalfence.model import TRACE_FORMAT, parse_trace
-from conftest import cloned
 
 
 def _events(document: dict[str, object]) -> list[dict[str, object]]:
@@ -71,7 +71,7 @@ def test_empty_event_list_is_rejected(incident: dict[str, object]) -> None:
         (4, "context", ["w01", "w01"], "contains duplicates"),
         (3, "context", ["r01"], "non-write"),
         (1, "context", ["w02"], "non-prior"),
-        (1, "observed", "w02", "another key"),
+        (3, "observed", "w01", "another key"),
     ],
 )
 def test_event_mutations_are_rejected(
