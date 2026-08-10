@@ -1,0 +1,238 @@
+{
+  "files": [
+    {
+      "bytes": 3099,
+      "media_type": "image/svg+xml",
+      "path": "docs/evidence/architecture.svg",
+      "sha256": "8dcb30d7814d9f3d0b1f2877742ca912fbf5526723a6a242fdb80350473dfb8f"
+    },
+    {
+      "bytes": 92339,
+      "dimensions": [
+        1180,
+        650
+      ],
+      "media_type": "image/png",
+      "path": "docs/evidence/causalfence-cli.png",
+      "sha256": "14233249bad1cae215fbd219216c615862b2be5b0c92e07f4b04dd7fcbdc6c99"
+    },
+    {
+      "bytes": 1593,
+      "media_type": "text/plain",
+      "path": "docs/evidence/causalfence-cli.txt",
+      "sha256": "2586b854ecedd0a9481fa81509014fe92d41bffc35454a229f80183397d1e290"
+    },
+    {
+      "bytes": 286258,
+      "dimensions": [
+        1120,
+        820
+      ],
+      "frames": 3,
+      "media_type": "image/gif",
+      "path": "docs/evidence/causalfence-demo.gif",
+      "sha256": "f078004e601d77c29e8f7ca814f30c6d0eac35caa49c68ffc21c568edbf9036f"
+    },
+    {
+      "bytes": 19004,
+      "media_type": "application/json",
+      "path": "docs/evidence/causalfence-receipt.json",
+      "sha256": "dc8f3acbca960fb01cc737c80b4896b5cfe2d0a7293d3b79f56a36e8024c1a39"
+    },
+    {
+      "bytes": 670721,
+      "dimensions": [
+        1440,
+        3162
+      ],
+      "media_type": "image/png",
+      "path": "docs/evidence/causalfence-report-full.png",
+      "sha256": "987d58cb2df95f2139cb45cba69e2277cb423ec0809937b47a65f6ba6ef90d62"
+    },
+    {
+      "bytes": 156983,
+      "dimensions": [
+        390,
+        844
+      ],
+      "media_type": "image/png",
+      "path": "docs/evidence/causalfence-report-mobile.png",
+      "sha256": "69654eac54d6000f2803e70aca5849b4e2ea42a3d3c2742d5ad75316660709f3"
+    },
+    {
+      "bytes": 14208,
+      "media_type": "text/html",
+      "path": "docs/evidence/causalfence-report.html",
+      "sha256": "20d3cd80c1f803b90d64aa3bba2449b6438582aa544c11907f87b775e9c5cfee"
+    },
+    {
+      "bytes": 396481,
+      "dimensions": [
+        1440,
+        1000
+      ],
+      "media_type": "image/png",
+      "path": "docs/evidence/causalfence-report.png",
+      "sha256": "71eb702ce5195de512e9cb43df268339b2d4e5debf36eaddf190669914ad97cb"
+    },
+    {
+      "bytes": 3270,
+      "media_type": "image/svg+xml",
+      "path": "docs/evidence/consistency-model.svg",
+      "sha256": "4b6f8a7a3f2d15ffc5b7490d85a34b3510749905bbee7f37045fd7121de27832"
+    },
+    {
+      "bytes": 2586,
+      "media_type": "image/svg+xml",
+      "path": "docs/evidence/finding-distribution.svg",
+      "sha256": "c52807b5534dde051aea6bcb5af2b8cb98a8d5eed8f3aa8711af610d8df23fe0"
+    },
+    {
+      "bytes": 7114,
+      "media_type": "image/svg+xml",
+      "path": "docs/evidence/incident-timeline.svg",
+      "sha256": "5545d4f2033de9c20db7a13283a629aab5ea1f0b8d28515250e294c5ff36f26a"
+    }
+  ],
+  "format": "causalfence.evidence.v1",
+  "generation": {
+    "browser": "Chromium 151.0.7922.34",
+    "container_image": "mcr.microsoft.com/playwright/python@sha256:51d31fdfacb0cff99a1a724152e34ae408d2bd4e7da310ff157450f49261cc59",
+    "filesystem": "read-only source mount",
+    "network": "disabled during browser capture",
+    "pillow": "12.3.0",
+    "playwright": "1.62.0",
+    "python": "3.14.6"
+  },
+  "ledger_root_sha256": "b35faf866e59d74aa57e4c4073dd9deba684475fd6799dfc1cbbe559fa82411c",
+  "receipt_sha256": "bd69701c451eb185400bff8460fc643c6a43e3c4241b8a498be909a649d1fb37",
+  "result": {
+    "conformant_events": 11,
+    "events": 16,
+    "findings": 9,
+    "reads": 8,
+    "regions": 3,
+    "rule_counts": {
+      "CAUSAL_CLOSURE": 1,
+      "MONOTONIC_READS": 2,
+      "MONOTONIC_WRITES": 2,
+      "READ_YOUR_WRITES": 2,
+      "WRITES_FOLLOW_READS": 2
+    },
+    "sessions": 5,
+    "trace_edges": 26,
+    "version_edges": 5,
+    "violating_events": 5,
+    "writes": 8
+  },
+  "source_revision": "648802497150b59a7422c1a71354413ca9ba1d8b",
+  "source_tree": "e2abb080e46c0ea480be400695fa0061e62b1f5a",
+  "sources": [
+    {
+      "bytes": 8004,
+      "path": ".github/workflows/evidence.yml",
+      "sha256": "9438d3bc7de2a282a82db089d3ccbc60f6bdaf76574059f90bb4613a52e8b174"
+    },
+    {
+      "bytes": 1814,
+      "path": "pyproject.toml",
+      "sha256": "70d70361d500dd16a02be2cda8ca329793e235fda826b0190295cfd18aa856b2"
+    },
+    {
+      "bytes": 394,
+      "path": "requirements/evidence-browser-image.lock.json",
+      "sha256": "1ba302dec7680863dcc3340ea8a129413c738c66b7f8bb0a4d95421bcf9e4c0f"
+    },
+    {
+      "bytes": 7250,
+      "path": "requirements/evidence-browser.txt",
+      "sha256": "6aa5ee3942f6dc461d35c87a3853c29a5c2a3f86bdb9fe5688bc042fe6cfc782"
+    },
+    {
+      "bytes": 139,
+      "path": "requirements/quality.in",
+      "sha256": "4fda60e9a15befda21c360eba93716d227e2269f7c03d0f5de57bc1e0925c6fc"
+    },
+    {
+      "bytes": 35224,
+      "path": "requirements/quality.txt",
+      "sha256": "2bb97d6fb7dcd5c0d58fb312883c4708b5016f194a66eac572d9b7acacaa79fa"
+    },
+    {
+      "bytes": 3457,
+      "path": "scenarios/multi-region-incident.json",
+      "sha256": "8f6a9972b8ddfbb915837bcf4858b279c2fcb6ce36d22409d2bb30906a52c599"
+    },
+    {
+      "bytes": 27975,
+      "path": "tools/capture_evidence.py",
+      "sha256": "00947a262ce8c34498c3fe1c69148a1471f54a53f5617462d54c1275d631a515"
+    },
+    {
+      "bytes": 240,
+      "path": "src/causalfence/__init__.py",
+      "sha256": "97a3cf4b61a6f7cce4b69262c658fe136f3af6f01cc6710cca528ae1ccfbeeaf"
+    },
+    {
+      "bytes": 127,
+      "path": "src/causalfence/__main__.py",
+      "sha256": "bf54dbc8de7ca93a88dff86894abb3ddfc73abc58d2c385718488845a236b354"
+    },
+    {
+      "bytes": 6549,
+      "path": "src/causalfence/analyze.py",
+      "sha256": "b0d7c1f4e866a81008a1f27078cbe98ecf9274d9b7c47c86103efd2760b0af4d"
+    },
+    {
+      "bytes": 2657,
+      "path": "src/causalfence/canonical.py",
+      "sha256": "c00e72c592f5e18fce0025eab26eb1e42e98dce25a697ccdd78b24cd632c6477"
+    },
+    {
+      "bytes": 4527,
+      "path": "src/causalfence/cli.py",
+      "sha256": "1fe7b7423031e51d7170f1b6c85e51af111f8caf9f7b453f55efb28e0e593647"
+    },
+    {
+      "bytes": 963,
+      "path": "src/causalfence/engine.py",
+      "sha256": "4498a2076476bfa6ffbd7469adfe9e8cfc0cc4be6583d05e573c3ecaea840fec"
+    },
+    {
+      "bytes": 346,
+      "path": "src/causalfence/errors.py",
+      "sha256": "b0ba914eac2d260572032720e617c0b124c8c7d7c6390a65d40e6e6f1bcad0bb"
+    },
+    {
+      "bytes": 1009,
+      "path": "src/causalfence/ledger.py",
+      "sha256": "91294f0927812766faa7cec58a63d5fe1949b20a0b8c84ad728fa3f3831f58ad"
+    },
+    {
+      "bytes": 5797,
+      "path": "src/causalfence/model.py",
+      "sha256": "15155b6772ad132cf8070ddb24b38933eba64ca1435dbc757a4807604feadd87"
+    },
+    {
+      "bytes": 3427,
+      "path": "src/causalfence/relation.py",
+      "sha256": "57eeed74a1b5b29bbe021c5d268034a207e6db2c4484f90a4d0154d61c4f2f3f"
+    },
+    {
+      "bytes": 9480,
+      "path": "src/causalfence/report.py",
+      "sha256": "5ca1593a7807660a25ced49a5c92c9f4d61f83edfd9a29925d53053d7938c9b8"
+    },
+    {
+      "bytes": 11186,
+      "path": "src/causalfence/verify.py",
+      "sha256": "7e4ba951d3e4ced582e9725174969b9687607099b9c378c603d89a3967dadbcc"
+    },
+    {
+      "bytes": 0,
+      "path": "src/causalfence/py.typed",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "trace_sha256": "6a79b5d0fec6bc5a00556bf85841decd8c410f86c3cd8f07c3e2e233d45bab8f"
+}

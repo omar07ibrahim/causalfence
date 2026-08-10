@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CausalFence · synthetic-three-region-incident-v1</title>
+<style>
+:root{--ink:#14253a;--muted:#637287;--paper:#f5f7fb;--card:#fff;--navy:#0b1f35;
+--cyan:#54d6ce;--blue:#4d7df3;--red:#ef6674;--amber:#f3b64b;--line:#dfe6ef}
+*{box-sizing:border-box}html{background:var(--paper);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}
+body{margin:0}header{background:radial-gradient(circle at 85% 10%,#174e67 0,transparent 34%),linear-gradient(135deg,#071522,#102c47);color:#fff;padding:54px max(5vw,28px) 48px}
+.eyebrow{color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+h1{font-size:clamp(38px,6vw,72px);line-height:1;margin:14px 0 18px;letter-spacing:-.04em}
+.lead{max-width:820px;color:#c7d6e6;font-size:18px}.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.badge{border:1px solid #ffffff2d;border-radius:999px;padding:7px 12px;background:#ffffff0d;color:#d8e8f6;font-size:12px}
+main{max-width:1240px;margin:auto;padding:32px 28px 70px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:-66px}
+.metric{background:var(--card);border:1px solid var(--line);box-shadow:0 18px 44px #233d5a12;border-radius:18px;padding:22px}
+.metric span,.metric small{display:block;color:var(--muted)}.metric strong{display:block;font-size:36px;line-height:1.1;margin:8px 0;color:var(--navy)}
+section{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;margin-top:22px;overflow:hidden}
+h2{font-size:24px;margin:0 0 6px;letter-spacing:-.02em}.sub{color:var(--muted);margin:0 0 22px}
+.overview{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}.overview section{margin:0}
+.bar-row{display:grid;grid-template-columns:145px 1fr 30px;align-items:center;gap:12px;margin:14px 0}
+.track{height:12px;background:#edf1f6;border-radius:99px;overflow:hidden}.track i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.timeline{display:grid;grid-template-columns:repeat(8,1fr);gap:9px}.tick{border:1px solid var(--line);border-top:4px solid var(--cyan);border-radius:12px;padding:10px;min-width:0}
+.tick.bad{border-top-color:var(--red);background:#fff8f8}.tick span,.tick small{display:block;color:var(--muted);font-size:11px}.tick b{display:block;font:700 14px ui-monospace,monospace;margin:3px 0}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}table{width:100%;border-collapse:collapse;min-width:900px}
+th,td{padding:12px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:#f8fafc}
+tr:last-child td{border-bottom:0}code{font:12px ui-monospace,SFMono-Regular,Consolas,monospace}.op,.rule{display:inline-block;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:800}
+.op.write{background:#e9f0ff;color:#315ec4}.op.read{background:#e8faf5;color:#147561}.rule{background:#fff0f1;color:#a83447}
+.digest{display:grid;grid-template-columns:170px 1fr;gap:10px 18px}.digest code{overflow-wrap:anywhere;color:#344d68}
+footer{color:var(--muted);font-size:12px;margin-top:24px;padding:0 6px}
+@media(max-width:850px){header{padding-bottom:88px}.metrics{grid-template-columns:repeat(2,1fr)}.overview{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:480px){main{padding:20px 14px 50px}header{padding:38px 18px 82px}.metrics{gap:9px}.metric{padding:15px}.metric strong{font-size:28px}section{padding:18px}.timeline{grid-template-columns:repeat(2,1fr)}.bar-row{grid-template-columns:120px 1fr 24px}.digest{grid-template-columns:1fr;gap:3px}}
+</style></head><body>
+<header><div class="eyebrow">CausalFence / independently replayed receipt</div>
+<h1>Consistency failures,<br>made answerable.</h1>
+<p class="lead">A deterministic analysis of declared version dependencies, causal closure,
+and four client-session guarantees. Wall clocks are display metadata—not proof.</p>
+<div class="badges"><span class="badge">synthetic fixture</span><span class="badge">3 regions</span>
+<span class="badge">5 sessions</span><span class="badge">Floyd–Warshall verifier passed</span></div></header>
+<main><div class="metrics"><article class="metric"><span>Events</span>
+<strong>16</strong><small>bounded trace</small></article><article class="metric"><span>Findings</span>
+<strong>9</strong><small>five guarantees</small></article><article class="metric"><span>Affected</span>
+<strong>5</strong><small>unique events</small></article><article class="metric"><span>Conformant</span>
+<strong>11</strong><small>no finding</small></article></div>
+<div class="overview"><section><h2>Rule outcomes</h2><p class="sub">Finding count, not a production error rate.</p><div class="bar-row"><span>Causal closure</span>
+<div class="track"><i style="width:50.0%"></i></div>
+<strong>1</strong></div><div class="bar-row"><span>Read your writes</span>
+<div class="track"><i style="width:100.0%"></i></div>
+<strong>2</strong></div><div class="bar-row"><span>Monotonic reads</span>
+<div class="track"><i style="width:100.0%"></i></div>
+<strong>2</strong></div><div class="bar-row"><span>Writes follow reads</span>
+<div class="track"><i style="width:100.0%"></i></div>
+<strong>2</strong></div><div class="bar-row"><span>Monotonic writes</span>
+<div class="track"><i style="width:100.0%"></i></div>
+<strong>2</strong></div></section>
+<section><h2>Evidence boundary</h2><p class="sub">The receipt proves deterministic replay of this bounded synthetic trace.
+It does not prove a database implementation, SLA, performance, or production correctness.</p>
+<p><strong>26</strong> trace edges · <strong>5</strong> declared version edges</p></section></div>
+<section id="timeline"><h2>Incident timeline</h2><p class="sub">Red ticks have at least one bounded witness.</p>
+<div class="timeline"><div class="tick ok">
+<span>1</span><b>w01</b>
+<small>us-east · write</small></div><div class="tick ok">
+<span>2</span><b>r01</b>
+<small>us-east · read</small></div><div class="tick ok">
+<span>3</span><b>w02</b>
+<small>us-east · write</small></div><div class="tick ok">
+<span>4</span><b>r02</b>
+<small>eu-west · read</small></div><div class="tick ok">
+<span>5</span><b>w03</b>
+<small>eu-west · write</small></div><div class="tick ok">
+<span>6</span><b>r03</b>
+<small>eu-west · read</small></div><div class="tick bad">
+<span>7</span><b>r04</b>
+<small>ap-south · read</small></div><div class="tick bad">
+<span>8</span><b>w04</b>
+<small>ap-south · write</small></div><div class="tick ok">
+<span>9</span><b>w05</b>
+<small>us-east · write</small></div><div class="tick ok">
+<span>10</span><b>r05</b>
+<small>eu-west · read</small></div><div class="tick bad">
+<span>11</span><b>w06</b>
+<small>eu-west · write</small></div><div class="tick bad">
+<span>12</span><b>r06</b>
+<small>eu-west · read</small></div><div class="tick ok">
+<span>13</span><b>w07</b>
+<small>us-east · write</small></div><div class="tick ok">
+<span>14</span><b>w08</b>
+<small>eu-west · write</small></div><div class="tick bad">
+<span>15</span><b>r07</b>
+<small>eu-west · read</small></div><div class="tick ok">
+<span>16</span><b>r08</b>
+<small>eu-west · read</small></div></div></section>
+<section id="findings"><h2>Minimal local witnesses</h2><p class="sub">Each finding names the operation pair and missing version needed for independent replay.</p>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Guarantee</th><th>At</th><th>Witness</th><th>Explanation</th></tr></thead>
+<tbody><tr><td><code>CF-B00270001EB9</code></td>
+<td><span class="rule">Read your writes</span></td>
+<td><code>r04</code></td>
+<td><code>w03 → r04</code></td>
+<td>read r04 does not include session write w03</td></tr><tr><td><code>CF-F678C191987B</code></td>
+<td><span class="rule">Monotonic reads</span></td>
+<td><code>r04</code></td>
+<td><code>r03 → r04</code></td>
+<td>read r04 moves behind observed version w03</td></tr><tr><td><code>CF-914FAAC6E9CE</code></td>
+<td><span class="rule">Writes follow reads</span></td>
+<td><code>w04</code></td>
+<td><code>r03 → w04</code></td>
+<td>write w04 does not carry read version w03</td></tr><tr><td><code>CF-3F61FC7B84DF</code></td>
+<td><span class="rule">Monotonic writes</span></td>
+<td><code>w04</code></td>
+<td><code>w03 → w04</code></td>
+<td>write w04 does not descend from session write w03</td></tr><tr><td><code>CF-D385E4ED42D2</code></td>
+<td><span class="rule">Writes follow reads</span></td>
+<td><code>w06</code></td>
+<td><code>r05 → w06</code></td>
+<td>write w06 does not carry read version w05</td></tr><tr><td><code>CF-184B7C38FEAA</code></td>
+<td><span class="rule">Monotonic writes</span></td>
+<td><code>w06</code></td>
+<td><code>w05 → w06</code></td>
+<td>write w06 does not descend from session write w05</td></tr><tr><td><code>CF-CA5A69B3BD5D</code></td>
+<td><span class="rule">Read your writes</span></td>
+<td><code>r06</code></td>
+<td><code>w06 → r06</code></td>
+<td>read r06 does not include session write w06</td></tr><tr><td><code>CF-5691654BE3AA</code></td>
+<td><span class="rule">Monotonic reads</span></td>
+<td><code>r06</code></td>
+<td><code>r05 → r06</code></td>
+<td>read r06 moves behind observed version w05</td></tr><tr><td><code>CF-A303B6F75C4E</code></td>
+<td><span class="rule">Causal closure</span></td>
+<td><code>r07</code></td>
+<td><code>w07 → r07</code></td>
+<td>event r07 omits causal ancestor(s): w07</td></tr></tbody></table></div></section>
+<section id="trace"><h2>Normalized trace</h2><p class="sub">Strict input order, declared context, and observed versions.</p>
+<div class="table-wrap"><table><thead><tr><th>Step</th><th>Event</th><th>Op</th><th>Region</th><th>Session</th><th>Key</th><th>Observed</th><th>Context</th></tr></thead>
+<tbody><tr class="event-row" data-event="w01">
+<td>1</td><td><code>w01</code></td>
+<td><span class="op write">write</span></td>
+<td>us-east</td><td>s-alice</td>
+<td>cart</td><td><code>∅</code></td>
+<td><code>∅</code></td></tr><tr class="event-row" data-event="r01">
+<td>2</td><td><code>r01</code></td>
+<td><span class="op read">read</span></td>
+<td>us-east</td><td>s-alice</td>
+<td>cart</td><td><code>w01</code></td>
+<td><code>∅</code></td></tr><tr class="event-row" data-event="w02">
+<td>3</td><td><code>w02</code></td>
+<td><span class="op write">write</span></td>
+<td>us-east</td><td>s-alice</td>
+<td>profile</td><td><code>∅</code></td>
+<td><code>w01</code></td></tr><tr class="event-row" data-event="r02">
+<td>4</td><td><code>r02</code></td>
+<td><span class="op read">read</span></td>
+<td>eu-west</td><td>s-bob</td>
+<td>profile</td><td><code>w02</code></td>
+<td><code>w01</code></td></tr><tr class="event-row" data-event="w03">
+<td>5</td><td><code>w03</code></td>
+<td><span class="op write">write</span></td>
+<td>eu-west</td><td>s-bob</td>
+<td>cart</td><td><code>∅</code></td>
+<td><code>w01, w02</code></td></tr><tr class="event-row" data-event="r03">
+<td>6</td><td><code>r03</code></td>
+<td><span class="op read">read</span></td>
+<td>eu-west</td><td>s-bob</td>
+<td>cart</td><td><code>w03</code></td>
+<td><code>w01, w02</code></td></tr><tr class="event-row" data-event="r04">
+<td>7</td><td><code>r04</code></td>
+<td><span class="op read">read</span></td>
+<td>ap-south</td><td>s-bob</td>
+<td>cart</td><td><code>w01</code></td>
+<td><code>∅</code></td></tr><tr class="event-row" data-event="w04">
+<td>8</td><td><code>w04</code></td>
+<td><span class="op write">write</span></td>
+<td>ap-south</td><td>s-bob</td>
+<td>coupon</td><td><code>∅</code></td>
+<td><code>w01</code></td></tr><tr class="event-row" data-event="w05">
+<td>9</td><td><code>w05</code></td>
+<td><span class="op write">write</span></td>
+<td>us-east</td><td>s-carol</td>
+<td>account</td><td><code>∅</code></td>
+<td><code>∅</code></td></tr><tr class="event-row" data-event="r05">
+<td>10</td><td><code>r05</code></td>
+<td><span class="op read">read</span></td>
+<td>eu-west</td><td>s-carol</td>
+<td>account</td><td><code>w05</code></td>
+<td><code>∅</code></td></tr><tr class="event-row" data-event="w06">
+<td>11</td><td><code>w06</code></td>
+<td><span class="op write">write</span></td>
+<td>eu-west</td><td>s-carol</td>
+<td>account</td><td><code>∅</code></td>
+<td><code>∅</code></td></tr><tr class="event-row" data-event="r06">
+<td>12</td><td><code>r06</code></td>
+<td><span class="op read">read</span></td>
+<td>eu-west</td><td>s-carol</td>
+<td>account</td><td><code>∅</code></td>
+<td><code>∅</code></td></tr><tr class="event-row" data-event="w07">
+<td>13</td><td><code>w07</code></td>
+<td><span class="op write">write</span></td>
+<td>us-east</td><td>s-dave</td>
+<td>config</td><td><code>∅</code></td>
+<td><code>∅</code></td></tr><tr class="event-row" data-event="w08">
+<td>14</td><td><code>w08</code></td>
+<td><span class="op write">write</span></td>
+<td>eu-west</td><td>s-erin</td>
+<td>service</td><td><code>∅</code></td>
+<td><code>w07</code></td></tr><tr class="event-row" data-event="r07">
+<td>15</td><td><code>r07</code></td>
+<td><span class="op read">read</span></td>
+<td>eu-west</td><td>s-erin</td>
+<td>service</td><td><code>w08</code></td>
+<td><code>∅</code></td></tr><tr class="event-row" data-event="r08">
+<td>16</td><td><code>r08</code></td>
+<td><span class="op read">read</span></td>
+<td>eu-west</td><td>s-erin</td>
+<td>config</td><td><code>w07</code></td>
+<td><code>∅</code></td></tr></tbody></table></div></section>
+<section id="receipt"><h2>Receipt integrity</h2><p class="sub">Canonical SHA-256 binds the trace, analysis fields, and append-only ledger.</p>
+<div class="digest"><strong>Trace SHA-256</strong><code>6a79b5d0fec6bc5a00556bf85841decd8c410f86c3cd8f07c3e2e233d45bab8f</code>
+<strong>Ledger root</strong><code>b35faf866e59d74aa57e4c4073dd9deba684475fd6799dfc1cbbe559fa82411c</code>
+<strong>Receipt SHA-256</strong><code>bd69701c451eb185400bff8460fc643c6a43e3c4241b8a498be909a649d1fb37</code></div></section>
+<footer>Generated deterministically by CausalFence v0.1.0 · no network, database, or model required.</footer>
+</main></body></html>

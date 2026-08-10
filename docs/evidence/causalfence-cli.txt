@@ -1,0 +1,28 @@
+$ causalfence analyze trace.json --output receipt.json
+analyzed 16 events across 3 regions / 5 sessions
+findings 9 across 5 events; conformant 11
+trace sha256   6a79b5d0fec6bc5a00556bf85841decd8c410f86c3cd8f07c3e2e233d45bab8f
+ledger root    b35faf866e59d74aa57e4c4073dd9deba684475fd6799dfc1cbbe559fa82411c
+receipt sha256 bd69701c451eb185400bff8460fc643c6a43e3c4241b8a498be909a649d1fb37
+
+$ causalfence verify receipt.json
+verified 16 events; 9 findings; 11 conformant events
+ledger root    b35faf866e59d74aa57e4c4073dd9deba684475fd6799dfc1cbbe559fa82411c
+receipt sha256 bd69701c451eb185400bff8460fc643c6a43e3c4241b8a498be909a649d1fb37
+
+$ causalfence inspect receipt.json
+ID               RULE                  AT    WITNESS           MISSING
+------------------------------------------------------------------------------
+CF-B00270001EB9  READ_YOUR_WRITES      r04   w03,r04           w03
+CF-F678C191987B  MONOTONIC_READS       r04   r03,r04           w03
+CF-914FAAC6E9CE  WRITES_FOLLOW_READS   w04   r03,w04           w03
+CF-3F61FC7B84DF  MONOTONIC_WRITES      w04   w03,w04           w03
+CF-D385E4ED42D2  WRITES_FOLLOW_READS   w06   r05,w06           w05
+CF-184B7C38FEAA  MONOTONIC_WRITES      w06   w05,w06           w05
+CF-CA5A69B3BD5D  READ_YOUR_WRITES      r06   w06,r06           w06
+CF-5691654BE3AA  MONOTONIC_READS       r06   r05,r06           w05
+CF-A303B6F75C4E  CAUSAL_CLOSURE        r07   w07,r07           w07
+
+$ causalfence report receipt.json --output report.html
+wrote verified report report.html
+receipt sha256 bd69701c451eb185400bff8460fc643c6a43e3c4241b8a498be909a649d1fb37

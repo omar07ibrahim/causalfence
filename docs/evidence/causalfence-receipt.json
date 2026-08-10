@@ -1,0 +1,694 @@
+{
+  "findings": [
+    {
+      "at_event": "r04",
+      "explanation": "read r04 does not include session write w03",
+      "finding_id": "CF-B00270001EB9",
+      "key": "cart",
+      "missing_versions": [
+        "w03"
+      ],
+      "rule": "READ_YOUR_WRITES",
+      "session": "s-bob",
+      "witness_events": [
+        "w03",
+        "r04"
+      ]
+    },
+    {
+      "at_event": "r04",
+      "explanation": "read r04 moves behind observed version w03",
+      "finding_id": "CF-F678C191987B",
+      "key": "cart",
+      "missing_versions": [
+        "w03"
+      ],
+      "rule": "MONOTONIC_READS",
+      "session": "s-bob",
+      "witness_events": [
+        "r03",
+        "r04"
+      ]
+    },
+    {
+      "at_event": "w04",
+      "explanation": "write w04 does not carry read version w03",
+      "finding_id": "CF-914FAAC6E9CE",
+      "key": "coupon",
+      "missing_versions": [
+        "w03"
+      ],
+      "rule": "WRITES_FOLLOW_READS",
+      "session": "s-bob",
+      "witness_events": [
+        "r03",
+        "w04"
+      ]
+    },
+    {
+      "at_event": "w04",
+      "explanation": "write w04 does not descend from session write w03",
+      "finding_id": "CF-3F61FC7B84DF",
+      "key": "coupon",
+      "missing_versions": [
+        "w03"
+      ],
+      "rule": "MONOTONIC_WRITES",
+      "session": "s-bob",
+      "witness_events": [
+        "w03",
+        "w04"
+      ]
+    },
+    {
+      "at_event": "w06",
+      "explanation": "write w06 does not carry read version w05",
+      "finding_id": "CF-D385E4ED42D2",
+      "key": "account",
+      "missing_versions": [
+        "w05"
+      ],
+      "rule": "WRITES_FOLLOW_READS",
+      "session": "s-carol",
+      "witness_events": [
+        "r05",
+        "w06"
+      ]
+    },
+    {
+      "at_event": "w06",
+      "explanation": "write w06 does not descend from session write w05",
+      "finding_id": "CF-184B7C38FEAA",
+      "key": "account",
+      "missing_versions": [
+        "w05"
+      ],
+      "rule": "MONOTONIC_WRITES",
+      "session": "s-carol",
+      "witness_events": [
+        "w05",
+        "w06"
+      ]
+    },
+    {
+      "at_event": "r06",
+      "explanation": "read r06 does not include session write w06",
+      "finding_id": "CF-CA5A69B3BD5D",
+      "key": "account",
+      "missing_versions": [
+        "w06"
+      ],
+      "rule": "READ_YOUR_WRITES",
+      "session": "s-carol",
+      "witness_events": [
+        "w06",
+        "r06"
+      ]
+    },
+    {
+      "at_event": "r06",
+      "explanation": "read r06 moves behind observed version w05",
+      "finding_id": "CF-5691654BE3AA",
+      "key": "account",
+      "missing_versions": [
+        "w05"
+      ],
+      "rule": "MONOTONIC_READS",
+      "session": "s-carol",
+      "witness_events": [
+        "r05",
+        "r06"
+      ]
+    },
+    {
+      "at_event": "r07",
+      "explanation": "event r07 omits causal ancestor(s): w07",
+      "finding_id": "CF-A303B6F75C4E",
+      "key": "service",
+      "missing_versions": [
+        "w07"
+      ],
+      "rule": "CAUSAL_CLOSURE",
+      "session": "s-erin",
+      "witness_events": [
+        "w07",
+        "r07"
+      ]
+    }
+  ],
+  "format": "causalfence.receipt.v1",
+  "ledger": [
+    {
+      "entry_sha256": "b1abc74846286e3518eadbf9aad4a26af5ba5fa479e6766114b95e5fdd329790",
+      "index": 0,
+      "kind": "event",
+      "payload_sha256": "33820620d82f4975f3caba5eb763e16624b8e4a0ddbf403f5e7bd5425d420a4a",
+      "previous_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "entry_sha256": "876a2a117007d2e9ca7d90dacb03d536f7c5439f9e168a5e8ba78e067c15caaa",
+      "index": 1,
+      "kind": "event",
+      "payload_sha256": "a1dede70a6d9c2af3595ef8185978d8fc8fe745fcde5f0d7494c9a3f206aa4f6",
+      "previous_sha256": "b1abc74846286e3518eadbf9aad4a26af5ba5fa479e6766114b95e5fdd329790"
+    },
+    {
+      "entry_sha256": "f24b6224d66d2fa3342b2165211c172dc2f57a99cc13d23ae7c9925839fa30ae",
+      "index": 2,
+      "kind": "event",
+      "payload_sha256": "5230e592d3701ed8c66b869c127f0c7802a5b2d60944b0bc77a758f011447803",
+      "previous_sha256": "876a2a117007d2e9ca7d90dacb03d536f7c5439f9e168a5e8ba78e067c15caaa"
+    },
+    {
+      "entry_sha256": "a17c5026dbcbac546cfc14a282c8d16a9fbe09ea847c90a19f4e006a53781fd9",
+      "index": 3,
+      "kind": "event",
+      "payload_sha256": "259d03cd5a5fc3dac9e1c6c02ae19582dd17bc6663240f2973b68c21cac11e17",
+      "previous_sha256": "f24b6224d66d2fa3342b2165211c172dc2f57a99cc13d23ae7c9925839fa30ae"
+    },
+    {
+      "entry_sha256": "f9135ed209165b6ec36f2e03adea6453b6648cf2ae01141efd4fac207daae723",
+      "index": 4,
+      "kind": "event",
+      "payload_sha256": "aa40b071cef5bed31aae793303e9c37868805979eb872d6659c2f9a8b664fede",
+      "previous_sha256": "a17c5026dbcbac546cfc14a282c8d16a9fbe09ea847c90a19f4e006a53781fd9"
+    },
+    {
+      "entry_sha256": "b2a7c2959405901d88bff9d9a0cf7cd47747a79271306dd937971e7213ba9eff",
+      "index": 5,
+      "kind": "event",
+      "payload_sha256": "0a4819aba3bda9951ab464602986fa0bfd551ddbec04d2d898e6b988a36ff18a",
+      "previous_sha256": "f9135ed209165b6ec36f2e03adea6453b6648cf2ae01141efd4fac207daae723"
+    },
+    {
+      "entry_sha256": "595800a3665b16446af4a4e467c1482741f848b5c9b04b6978c930a42d660fb2",
+      "index": 6,
+      "kind": "event",
+      "payload_sha256": "0d5fda1de46f34ac230839ac130f84728aa093ee1a12cf163c69b1744442079a",
+      "previous_sha256": "b2a7c2959405901d88bff9d9a0cf7cd47747a79271306dd937971e7213ba9eff"
+    },
+    {
+      "entry_sha256": "edfccea83ccd66b52d7828498e0c306e747546b48895f455743d868ba5b3a133",
+      "index": 7,
+      "kind": "event",
+      "payload_sha256": "da862f049a910a8aeb6abeeb151fba723e5bbde2e5366685ef5bb6e265c04777",
+      "previous_sha256": "595800a3665b16446af4a4e467c1482741f848b5c9b04b6978c930a42d660fb2"
+    },
+    {
+      "entry_sha256": "e806ead1c8e21fd633257b9472fd5e087dbe9c1ed4455c55f742fcf6599f94fd",
+      "index": 8,
+      "kind": "event",
+      "payload_sha256": "9a61537d700200cf37e43f3afc4c2a1e28f3f4d827e4de05476002a97bf39fd2",
+      "previous_sha256": "edfccea83ccd66b52d7828498e0c306e747546b48895f455743d868ba5b3a133"
+    },
+    {
+      "entry_sha256": "5fc324e22bba6e5408e9eeda6500a277aafa8ddd544af06f1c3d9ce14bb3f129",
+      "index": 9,
+      "kind": "event",
+      "payload_sha256": "2521938ccc96dfc9600924be8dbbf4d005c5d834c419515c0c9a786fbddf21c3",
+      "previous_sha256": "e806ead1c8e21fd633257b9472fd5e087dbe9c1ed4455c55f742fcf6599f94fd"
+    },
+    {
+      "entry_sha256": "a8c01633461a45a0a79006c526456ef7bed448d24087e2c9e1fa4f739b0210d1",
+      "index": 10,
+      "kind": "event",
+      "payload_sha256": "6025f19ee147657dd2873bdaf3e455e5f7a19412397688166dc88fab2f7d842b",
+      "previous_sha256": "5fc324e22bba6e5408e9eeda6500a277aafa8ddd544af06f1c3d9ce14bb3f129"
+    },
+    {
+      "entry_sha256": "d0a9a175fe31050038ce99498a1fbb533ccf3cf4c8aa9e95c0d6f8b755df1393",
+      "index": 11,
+      "kind": "event",
+      "payload_sha256": "1f9e872a5d64ca442eb319bfe96799b4b6a028c0d25f46aacd8ddbb569963b1d",
+      "previous_sha256": "a8c01633461a45a0a79006c526456ef7bed448d24087e2c9e1fa4f739b0210d1"
+    },
+    {
+      "entry_sha256": "3027887212827a8205ce47a7efb2530096d17236e0fffdb3a21dda586bbfee91",
+      "index": 12,
+      "kind": "event",
+      "payload_sha256": "aaae51748df082294506dbfbd7c4e918171319c04f48e0c6b7b91167c45ee0a9",
+      "previous_sha256": "d0a9a175fe31050038ce99498a1fbb533ccf3cf4c8aa9e95c0d6f8b755df1393"
+    },
+    {
+      "entry_sha256": "c3cf8f1c8086bd221ed00c9125ac06363f2e3304f697a112a51aca8da0298e6b",
+      "index": 13,
+      "kind": "event",
+      "payload_sha256": "a0fa210030aa18f6e2285fd683341197897c2b462c13a153e145b03d89a8d9b1",
+      "previous_sha256": "3027887212827a8205ce47a7efb2530096d17236e0fffdb3a21dda586bbfee91"
+    },
+    {
+      "entry_sha256": "e4ad825a5bff1b49cc112ec24bef2206f385d465dd2468ad1f38fedc6a0f0ca3",
+      "index": 14,
+      "kind": "event",
+      "payload_sha256": "bae8923d69b0015d38a68668b4e47135529a11a0a57d6f80728a77b8984bd250",
+      "previous_sha256": "c3cf8f1c8086bd221ed00c9125ac06363f2e3304f697a112a51aca8da0298e6b"
+    },
+    {
+      "entry_sha256": "8e6fca9e61d628277b5f1c17e2ebc628905167a2f4ab5efb9010df47bcf1216d",
+      "index": 15,
+      "kind": "event",
+      "payload_sha256": "1fbf289365251c16162c8b78f0adf0e6f66387f7b9b4aa195e0da8385cf2180c",
+      "previous_sha256": "e4ad825a5bff1b49cc112ec24bef2206f385d465dd2468ad1f38fedc6a0f0ca3"
+    },
+    {
+      "entry_sha256": "ce8ae863e6b38a1ab8119c499ae5d8d9428f0366be0a69465f493f1929f3a0dc",
+      "index": 16,
+      "kind": "finding",
+      "payload_sha256": "f716a4b5881f26f7a843718a7d16edc52d43a09713ce8cdbcd589e1f5cd0449e",
+      "previous_sha256": "8e6fca9e61d628277b5f1c17e2ebc628905167a2f4ab5efb9010df47bcf1216d"
+    },
+    {
+      "entry_sha256": "2ba73c9a0fb6fbc42c4a652da8e7a63c94b2c58447b57dd94ec96a6cb15a7eca",
+      "index": 17,
+      "kind": "finding",
+      "payload_sha256": "3848b70dc0a5fa42cf5238a657cfa6d5aa98d92260c564248365c5ce1a9ad491",
+      "previous_sha256": "ce8ae863e6b38a1ab8119c499ae5d8d9428f0366be0a69465f493f1929f3a0dc"
+    },
+    {
+      "entry_sha256": "21931070731105caae5eb2db0683c338641cd7553e3d09ba355f1674c9d212bf",
+      "index": 18,
+      "kind": "finding",
+      "payload_sha256": "fba12d9538724a6086fce65a31e876a6bdf9d781ebf0f5e1f492b1e62d989eae",
+      "previous_sha256": "2ba73c9a0fb6fbc42c4a652da8e7a63c94b2c58447b57dd94ec96a6cb15a7eca"
+    },
+    {
+      "entry_sha256": "0f0f658e09cf16b35ce974791a87e436ab091ad14e6e6c3ef202c9cef1da31b3",
+      "index": 19,
+      "kind": "finding",
+      "payload_sha256": "bc4fa5286ed52a00399da3101990385e297330c663a7497beaaebf598b293ecc",
+      "previous_sha256": "21931070731105caae5eb2db0683c338641cd7553e3d09ba355f1674c9d212bf"
+    },
+    {
+      "entry_sha256": "9b358dc9929b239ea7abcc023602ac803ba7405a72e7c4b5e06bfc6c9306179a",
+      "index": 20,
+      "kind": "finding",
+      "payload_sha256": "972f883e7a5337cee6a3aa029ba463256d0915a70f08b45d3318f4e981052653",
+      "previous_sha256": "0f0f658e09cf16b35ce974791a87e436ab091ad14e6e6c3ef202c9cef1da31b3"
+    },
+    {
+      "entry_sha256": "5a25a6f3f7b8385d8efeb3c7039aa90d803f79a1c98136de42204c70209a8e73",
+      "index": 21,
+      "kind": "finding",
+      "payload_sha256": "cdd8e8fe69ddb461adaf0046ba2abc6914b4be80ae4ccea29f9e09967389c5d1",
+      "previous_sha256": "9b358dc9929b239ea7abcc023602ac803ba7405a72e7c4b5e06bfc6c9306179a"
+    },
+    {
+      "entry_sha256": "6431611b690e19091c6bfdb4ecd0ac88222c3e7e0459c924209e3137948f221a",
+      "index": 22,
+      "kind": "finding",
+      "payload_sha256": "0a39d1c3805400aebd45f11b37155eff51c39f8c03b172835715fda9d12005be",
+      "previous_sha256": "5a25a6f3f7b8385d8efeb3c7039aa90d803f79a1c98136de42204c70209a8e73"
+    },
+    {
+      "entry_sha256": "397cae98ced7782efd2fa8268e259a5589eac93de50934781913f5f82c57ca1d",
+      "index": 23,
+      "kind": "finding",
+      "payload_sha256": "d8d04d8a3304940acadb64cf9a339033099ca74122aa332b3a707e3d5b2989d8",
+      "previous_sha256": "6431611b690e19091c6bfdb4ecd0ac88222c3e7e0459c924209e3137948f221a"
+    },
+    {
+      "entry_sha256": "b35faf866e59d74aa57e4c4073dd9deba684475fd6799dfc1cbbe559fa82411c",
+      "index": 24,
+      "kind": "finding",
+      "payload_sha256": "c6e94b98fa4e7c9c3b0989c0f57946f7f19ac947670e842eafac7ee5e6506a59",
+      "previous_sha256": "397cae98ced7782efd2fa8268e259a5589eac93de50934781913f5f82c57ca1d"
+    }
+  ],
+  "ledger_root_sha256": "b35faf866e59d74aa57e4c4073dd9deba684475fd6799dfc1cbbe559fa82411c",
+  "receipt_sha256": "bd69701c451eb185400bff8460fc643c6a43e3c4241b8a498be909a649d1fb37",
+  "relation": {
+    "trace_edges": [
+      {
+        "kind": "session",
+        "source": "w01",
+        "target": "r01"
+      },
+      {
+        "kind": "read-from",
+        "source": "w01",
+        "target": "r01"
+      },
+      {
+        "kind": "session",
+        "source": "r01",
+        "target": "w02"
+      },
+      {
+        "kind": "context",
+        "source": "w01",
+        "target": "w02"
+      },
+      {
+        "kind": "context",
+        "source": "w01",
+        "target": "r02"
+      },
+      {
+        "kind": "read-from",
+        "source": "w02",
+        "target": "r02"
+      },
+      {
+        "kind": "session",
+        "source": "r02",
+        "target": "w03"
+      },
+      {
+        "kind": "context",
+        "source": "w01",
+        "target": "w03"
+      },
+      {
+        "kind": "context",
+        "source": "w02",
+        "target": "w03"
+      },
+      {
+        "kind": "session",
+        "source": "w03",
+        "target": "r03"
+      },
+      {
+        "kind": "context",
+        "source": "w01",
+        "target": "r03"
+      },
+      {
+        "kind": "context",
+        "source": "w02",
+        "target": "r03"
+      },
+      {
+        "kind": "read-from",
+        "source": "w03",
+        "target": "r03"
+      },
+      {
+        "kind": "session",
+        "source": "r03",
+        "target": "r04"
+      },
+      {
+        "kind": "read-from",
+        "source": "w01",
+        "target": "r04"
+      },
+      {
+        "kind": "session",
+        "source": "r04",
+        "target": "w04"
+      },
+      {
+        "kind": "context",
+        "source": "w01",
+        "target": "w04"
+      },
+      {
+        "kind": "session",
+        "source": "w05",
+        "target": "r05"
+      },
+      {
+        "kind": "read-from",
+        "source": "w05",
+        "target": "r05"
+      },
+      {
+        "kind": "session",
+        "source": "r05",
+        "target": "w06"
+      },
+      {
+        "kind": "session",
+        "source": "w06",
+        "target": "r06"
+      },
+      {
+        "kind": "context",
+        "source": "w07",
+        "target": "w08"
+      },
+      {
+        "kind": "session",
+        "source": "w08",
+        "target": "r07"
+      },
+      {
+        "kind": "read-from",
+        "source": "w08",
+        "target": "r07"
+      },
+      {
+        "kind": "session",
+        "source": "r07",
+        "target": "r08"
+      },
+      {
+        "kind": "read-from",
+        "source": "w07",
+        "target": "r08"
+      }
+    ],
+    "version_ancestors": {
+      "w01": [],
+      "w02": [
+        "w01"
+      ],
+      "w03": [
+        "w01",
+        "w02"
+      ],
+      "w04": [
+        "w01"
+      ],
+      "w05": [],
+      "w06": [],
+      "w07": [],
+      "w08": [
+        "w07"
+      ]
+    },
+    "version_edges": [
+      {
+        "source": "w01",
+        "target": "w02"
+      },
+      {
+        "source": "w01",
+        "target": "w03"
+      },
+      {
+        "source": "w01",
+        "target": "w04"
+      },
+      {
+        "source": "w02",
+        "target": "w03"
+      },
+      {
+        "source": "w07",
+        "target": "w08"
+      }
+    ]
+  },
+  "summary": {
+    "conformant_events": 11,
+    "events": 16,
+    "findings": 9,
+    "reads": 8,
+    "regions": 3,
+    "rule_counts": {
+      "CAUSAL_CLOSURE": 1,
+      "MONOTONIC_READS": 2,
+      "MONOTONIC_WRITES": 2,
+      "READ_YOUR_WRITES": 2,
+      "WRITES_FOLLOW_READS": 2
+    },
+    "sessions": 5,
+    "trace_edges": 26,
+    "version_edges": 5,
+    "violating_events": 5,
+    "writes": 8
+  },
+  "trace": {
+    "events": [
+      {
+        "context": [],
+        "event_id": "w01",
+        "key": "cart",
+        "kind": "write",
+        "observed": null,
+        "region": "us-east",
+        "session": "s-alice",
+        "step": 1
+      },
+      {
+        "context": [],
+        "event_id": "r01",
+        "key": "cart",
+        "kind": "read",
+        "observed": "w01",
+        "region": "us-east",
+        "session": "s-alice",
+        "step": 2
+      },
+      {
+        "context": [
+          "w01"
+        ],
+        "event_id": "w02",
+        "key": "profile",
+        "kind": "write",
+        "observed": null,
+        "region": "us-east",
+        "session": "s-alice",
+        "step": 3
+      },
+      {
+        "context": [
+          "w01"
+        ],
+        "event_id": "r02",
+        "key": "profile",
+        "kind": "read",
+        "observed": "w02",
+        "region": "eu-west",
+        "session": "s-bob",
+        "step": 4
+      },
+      {
+        "context": [
+          "w01",
+          "w02"
+        ],
+        "event_id": "w03",
+        "key": "cart",
+        "kind": "write",
+        "observed": null,
+        "region": "eu-west",
+        "session": "s-bob",
+        "step": 5
+      },
+      {
+        "context": [
+          "w01",
+          "w02"
+        ],
+        "event_id": "r03",
+        "key": "cart",
+        "kind": "read",
+        "observed": "w03",
+        "region": "eu-west",
+        "session": "s-bob",
+        "step": 6
+      },
+      {
+        "context": [],
+        "event_id": "r04",
+        "key": "cart",
+        "kind": "read",
+        "observed": "w01",
+        "region": "ap-south",
+        "session": "s-bob",
+        "step": 7
+      },
+      {
+        "context": [
+          "w01"
+        ],
+        "event_id": "w04",
+        "key": "coupon",
+        "kind": "write",
+        "observed": null,
+        "region": "ap-south",
+        "session": "s-bob",
+        "step": 8
+      },
+      {
+        "context": [],
+        "event_id": "w05",
+        "key": "account",
+        "kind": "write",
+        "observed": null,
+        "region": "us-east",
+        "session": "s-carol",
+        "step": 9
+      },
+      {
+        "context": [],
+        "event_id": "r05",
+        "key": "account",
+        "kind": "read",
+        "observed": "w05",
+        "region": "eu-west",
+        "session": "s-carol",
+        "step": 10
+      },
+      {
+        "context": [],
+        "event_id": "w06",
+        "key": "account",
+        "kind": "write",
+        "observed": null,
+        "region": "eu-west",
+        "session": "s-carol",
+        "step": 11
+      },
+      {
+        "context": [],
+        "event_id": "r06",
+        "key": "account",
+        "kind": "read",
+        "observed": null,
+        "region": "eu-west",
+        "session": "s-carol",
+        "step": 12
+      },
+      {
+        "context": [],
+        "event_id": "w07",
+        "key": "config",
+        "kind": "write",
+        "observed": null,
+        "region": "us-east",
+        "session": "s-dave",
+        "step": 13
+      },
+      {
+        "context": [
+          "w07"
+        ],
+        "event_id": "w08",
+        "key": "service",
+        "kind": "write",
+        "observed": null,
+        "region": "eu-west",
+        "session": "s-erin",
+        "step": 14
+      },
+      {
+        "context": [],
+        "event_id": "r07",
+        "key": "service",
+        "kind": "read",
+        "observed": "w08",
+        "region": "eu-west",
+        "session": "s-erin",
+        "step": 15
+      },
+      {
+        "context": [],
+        "event_id": "r08",
+        "key": "config",
+        "kind": "read",
+        "observed": "w07",
+        "region": "eu-west",
+        "session": "s-erin",
+        "step": 16
+      }
+    ],
+    "format": "causalfence.trace.v1",
+    "trace_id": "synthetic-three-region-incident-v1"
+  },
+  "trace_sha256": "6a79b5d0fec6bc5a00556bf85841decd8c410f86c3cd8f07c3e2e233d45bab8f"
+}
