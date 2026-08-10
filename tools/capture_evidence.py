@@ -387,9 +387,7 @@ def verify_visuals(output_root: Path) -> None:
     with Image.open(evidence / "causalfence-demo.gif") as image:
         frames = [frame.convert("RGB") for frame in ImageSequence.Iterator(image)]
         if image.format != "GIF" or image.size != (1120, 820) or len(frames) != 3:
-            raise ValueError(
-                f"unexpected GIF contract: {image.format} {image.size} {len(frames)}"
-            )
+            raise ValueError(f"unexpected GIF contract: {image.format} {image.size} {len(frames)}")
         digests = set()
         for index, frame in enumerate(frames):
             _reject_blank_image(frame, f"causalfence-demo.gif frame {index}")
@@ -436,7 +434,7 @@ def _architecture_svg(receipt: dict[str, object]) -> str:
     )
     boxes = "".join(
         f"""<g transform="translate({45 + index * 230} 175)">
-<rect width="195" height="190" rx="24" fill="#102940" stroke="{'#ff6d7d' if index == 0 else '#51d2c8'}" stroke-width="2"/>
+<rect width="195" height="190" rx="24" fill="#102940" stroke="{"#ff6d7d" if index == 0 else "#51d2c8"}" stroke-width="2"/>
 <text x="20" y="35" fill="#78e7df" font-size="13" font-weight="800">{number}</text>
 <text x="20" y="78" fill="#fff" font-size="15" font-weight="800">{title}</text>
 <text x="20" y="116" fill="#bfd0df" font-size="12">{detail}</text>
@@ -453,7 +451,7 @@ def _architecture_svg(receipt: dict[str, object]) -> str:
 <text x="45" y="62" fill="#78e7df" font-size="14" font-weight="800" letter-spacing="2">CAUSALFENCE / DUAL-ALGORITHM WORKFLOW</text>
 <text x="45" y="108" fill="#fff" font-size="33" font-weight="800">A trace is evidence only after independent replay</text>
 {boxes}{arrows}
-<text x="45" y="440" fill="#aec2d3" font-size="13">Trace {str(receipt['trace_sha256'])[:18]}… · Ledger {str(receipt['ledger_root_sha256'])[:18]}…</text>
+<text x="45" y="440" fill="#aec2d3" font-size="13">Trace {str(receipt["trace_sha256"])[:18]}… · Ledger {str(receipt["ledger_root_sha256"])[:18]}…</text>
 <text x="45" y="474" fill="#e0ebf3" font-size="14">Analyzer and verifier share the trace contract—not the graph implementation.</text>
 </svg>
 """
@@ -501,7 +499,7 @@ def _consistency_svg(receipt: dict[str, object]) -> str:
 <text x="865" y="150" fill="#102d4b" font-size="16" font-weight="800">Independent result</text>
 <text x="865" y="190" fill="#e9566d" font-size="42" font-weight="800">{len(findings)}</text>
 <text x="925" y="187" fill="#63788d" font-size="14">findings</text>
-<text x="865" y="230" fill="#36536e" font-size="13">Receipt {str(receipt['receipt_sha256'])[:18]}…</text>
+<text x="865" y="230" fill="#36536e" font-size="13">Receipt {str(receipt["receipt_sha256"])[:18]}…</text>
 </svg>
 """
 
@@ -513,11 +511,11 @@ def _timeline_svg(receipt: dict[str, object]) -> str:
     affected = {str(item["at_event"]) for item in findings}
     cards = "".join(
         f"""<g transform="translate({50 + (index % 8) * 140} {145 + (index // 8) * 190})">
-<rect width="118" height="132" rx="17" fill="{'#fff0f2' if event['event_id'] in affected else '#eaf8f5'}" stroke="{'#e9566d' if event['event_id'] in affected else '#2baa91'}" stroke-width="2"/>
-<text x="14" y="27" fill="#718296" font-size="11">STEP {event['step']}</text>
-<text x="14" y="59" fill="#102d4b" font-size="18" font-weight="800">{event['event_id']}</text>
-<text x="14" y="85" fill="#3f5a72" font-size="12">{event['kind']} · {event['key']}</text>
-<text x="14" y="108" fill="#718296" font-size="10">{event['region']}</text>
+<rect width="118" height="132" rx="17" fill="{"#fff0f2" if event["event_id"] in affected else "#eaf8f5"}" stroke="{"#e9566d" if event["event_id"] in affected else "#2baa91"}" stroke-width="2"/>
+<text x="14" y="27" fill="#718296" font-size="11">STEP {event["step"]}</text>
+<text x="14" y="59" fill="#102d4b" font-size="18" font-weight="800">{event["event_id"]}</text>
+<text x="14" y="85" fill="#3f5a72" font-size="12">{event["kind"]} · {event["key"]}</text>
+<text x="14" y="108" fill="#718296" font-size="10">{event["region"]}</text>
 </g>"""
         for index, event in enumerate(events)
     )
@@ -538,7 +536,7 @@ def _distribution_svg(receipt: dict[str, object]) -> str:
     bars = "".join(
         f"""<text x="65" y="{165 + index * 70}" fill="#29445f" font-size="14">{RULE_LABELS[rule]}</text>
 <rect x="260" y="{142 + index * 70}" width="650" height="32" rx="16" fill="#e8eef4"/>
-<rect x="260" y="{142 + index * 70}" width="{650 * count / maximum:.1f}" height="32" rx="16" fill="{'#e9566d' if count else '#43b9a8'}"/>
+<rect x="260" y="{142 + index * 70}" width="{650 * count / maximum:.1f}" height="32" rx="16" fill="{"#e9566d" if count else "#43b9a8"}"/>
 <text x="940" y="{166 + index * 70}" fill="#102d4b" font-size="18" font-weight="800">{count}</text>"""
         for index, (rule, count) in enumerate(counts.items())
     )
@@ -549,11 +547,11 @@ def _distribution_svg(receipt: dict[str, object]) -> str:
 {bars}
 <rect x="1010" y="135" width="140" height="270" rx="22" fill="#102d4b"/>
 <text x="1080" y="180" text-anchor="middle" fill="#78e7df" font-size="12" font-weight="800">EVENTS</text>
-<text x="1080" y="245" text-anchor="middle" fill="#fff" font-size="42" font-weight="800">{summary['conformant_events']}</text>
+<text x="1080" y="245" text-anchor="middle" fill="#fff" font-size="42" font-weight="800">{summary["conformant_events"]}</text>
 <text x="1080" y="270" text-anchor="middle" fill="#bfd0df" font-size="11">conformant</text>
-<text x="1080" y="340" text-anchor="middle" fill="#ff98a5" font-size="42" font-weight="800">{summary['violating_events']}</text>
+<text x="1080" y="340" text-anchor="middle" fill="#ff98a5" font-size="42" font-weight="800">{summary["violating_events"]}</text>
 <text x="1080" y="365" text-anchor="middle" fill="#bfd0df" font-size="11">affected</text>
-<text x="50" y="520" fill="#63788d" font-size="13">Synthetic trace · {summary['regions']} regions · {summary['sessions']} sessions · independent matrix replay passed.</text>
+<text x="50" y="520" fill="#63788d" font-size="13">Synthetic trace · {summary["regions"]} regions · {summary["sessions"]} sessions · independent matrix replay passed.</text>
 </svg>
 """
 
