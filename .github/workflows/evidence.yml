@@ -1,0 +1,132 @@
+name: CausalFence evidence
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: causalfence-evidence-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  evidence:
+    name: Visual evidence drift (Chromium 151)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      CONTAINER_IMAGE: mcr.microsoft.com/playwright/python@sha256:51d31fdfacb0cff99a1a724152e34ae408d2bd4e7da310ff157450f49261cc59
+    steps:
+      - name: Check out exact revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Set up exact application runtime
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14.6"
+      - name: Install locked application environment
+        run: |
+          set -euo pipefail
+          test "$(python --version)" = "Python 3.14.6"
+          python -m pip install --no-deps --require-hashes -r requirements/quality.txt
+          python -m pip install --no-build-isolation --no-deps .
+      - name: Derive source-bound evidence revision
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          SOURCE_REVISION="$(git log -1 --format=%H -- .github/workflows/evidence.yml pyproject.toml requirements/evidence-browser-image.lock.json requirements/evidence-browser.txt requirements/quality.in requirements/quality.txt scenarios src tools/capture_evidence.py)"
+          SOURCE_TREE="$(git rev-parse "$SOURCE_REVISION^{tree}")"
+          for value in "$SOURCE_REVISION" "$SOURCE_TREE"; do
+            test "$(printf '%s' "$value" | wc -c)" -eq 40
+            case "$value" in *[!0-9a-f]*) exit 1;; esac
+          done
+          echo "SOURCE_REVISION=$SOURCE_REVISION" >>"$GITHUB_ENV"
+          echo "SOURCE_TREE=$SOURCE_TREE" >>"$GITHUB_ENV"
+      - name: Build real receipt, CLI, and report inputs
+        run: |
+          set -euo pipefail
+          input="$RUNNER_TEMP/causalfence-input"
+          mkdir -m 700 "$input"
+          cp scenarios/multi-region-incident.json "$input/trace.json"
+          (
+            cd "$input"
+            {
+              echo '$ causalfence analyze trace.json --output receipt.json'
+              causalfence analyze trace.json --output receipt.json
+              echo
+              echo '$ causalfence verify receipt.json'
+              causalfence verify receipt.json
+              echo
+              echo '$ causalfence inspect receipt.json'
+              causalfence inspect receipt.json
+              echo
+              echo '$ causalfence report receipt.json --output report.html'
+              causalfence report receipt.json --output report.html
+            } >causalfence-cli.txt
+          )
+          python tools/capture_evidence.py prepare             --root "$GITHUB_WORKSPACE"             --receipt "$input/receipt.json"             --report "$input/report.html"             --cli "$input/causalfence-cli.txt"             --output-root "$RUNNER_TEMP/causalfence-evidence"
+      - name: Set up exact evidence wheel downloader
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12.3"
+      - name: Download hash-locked browser wheels
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/evidence-wheelhouse"
+          python -m pip download --require-hashes --only-binary=:all:             --dest "$RUNNER_TEMP/evidence-wheelhouse"             -r requirements/evidence-browser.txt
+          test "$(find "$RUNNER_TEMP/evidence-wheelhouse" -maxdepth 1 -type f | wc -l)" -eq 5
+      - name: Regenerate rasters in a networkless pinned browser
+        run: |
+          set -euo pipefail
+          docker pull --platform linux/amd64 "$CONTAINER_IMAGE"
+          test "$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}/{{.Os}}')" = "amd64/linux"
+          docker run --rm             --platform linux/amd64             --pull=never             --network=none             --read-only             --cap-drop=ALL             --security-opt=no-new-privileges             --pids-limit=512             --memory=4g             --cpus=2             --shm-size=1g             --tmpfs /tmp:rw,exec,nosuid,nodev,size=2147483648             --user "$(id -u):$(id -g)"             --env HOME=/tmp/home             --env PYTHONNOUSERSITE=1             --env PYTHONPATH=/tmp/evidence-python             --volume "$GITHUB_WORKSPACE:/src:ro"             --volume "$RUNNER_TEMP/evidence-wheelhouse:/wheelhouse:ro"             --volume "$RUNNER_TEMP:/out:rw"             --entrypoint bash             "$CONTAINER_IMAGE"             -euo pipefail -c '
+              mkdir -p "$HOME" /tmp/evidence-python
+              python -m pip install --no-index --find-links=/wheelhouse --target=/tmp/evidence-python Pillow==12.3.0 playwright==1.62.0
+              python /src/tools/capture_evidence.py capture --output-root /out/causalfence-evidence --container-image "'"$CONTAINER_IMAGE"'"
+              python /src/tools/capture_evidence.py verify-visuals --output-root /out/causalfence-evidence
+            '
+      - name: Restore exact application runtime
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14.6"
+      - name: Finalize and independently replay candidate
+        run: |
+          set -euo pipefail
+          candidate="$RUNNER_TEMP/causalfence-evidence"
+          python tools/capture_evidence.py finalize             --root "$GITHUB_WORKSPACE"             --output-root "$candidate"             --source-revision "$SOURCE_REVISION"             --source-tree "$SOURCE_TREE"             --container-image "$CONTAINER_IMAGE"             --browser "Chromium 151.0.7922.34"             --playwright "1.62.0"             --pillow "12.3.0"
+          python tools/capture_evidence.py verify             --root "$GITHUB_WORKSPACE"             --output-root "$candidate"             --source-revision "$SOURCE_REVISION"             --source-tree "$SOURCE_TREE"             --container-image "$CONTAINER_IMAGE"
+          test "$(find "$candidate/docs/evidence" -type f | wc -l)" -eq 13
+      - name: Synchronize real evidence on same-repository PR
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          candidate="$RUNNER_TEMP/causalfence-evidence"
+          rm -rf docs/evidence
+          mkdir -p docs
+          cp -a "$candidate/docs/evidence" docs/evidence
+          python tools/capture_evidence.py verify             --root "$GITHUB_WORKSPACE"             --output-root "$GITHUB_WORKSPACE"             --source-revision "$SOURCE_REVISION"             --source-tree "$SOURCE_TREE"             --container-image "$CONTAINER_IMAGE"
+          git diff --check
+          changes="$(git status --porcelain=v1 --untracked-files=all -- docs/evidence)"
+          if test -n "$changes"; then
+            if test "$EVENT_NAME" != pull_request || test "$HEAD_REPOSITORY" != "$REPOSITORY" || test -z "$HEAD_REF"; then
+              echo "Evidence drift detected outside an authorized same-repository PR" >&2
+              exit 1
+            fi
+            git config user.name "Omar Ibrahim"
+            git config user.email "31526072+omar07ibrahim@users.noreply.github.com"
+            git add docs/evidence
+            git commit -m "docs: regenerate source-bound visual evidence"
+            git push origin "HEAD:refs/heads/$HEAD_REF"
+          fi
+          test -z "$(git status --porcelain=v1 --untracked-files=all)"
