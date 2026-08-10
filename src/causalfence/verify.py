@@ -22,7 +22,7 @@ _RULES = (
     "MONOTONIC_WRITES",
 )
 _EDGE_ORDER = {"session": 0, "context": 1, "read-from": 2}
-__RECEIPT_FORMAT = "causalfence.receipt.v1"
+_RECEIPT_FORMAT = "causalfence.receipt.v1"
 
 
 def _finding(
