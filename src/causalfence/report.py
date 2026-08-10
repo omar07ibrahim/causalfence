@@ -48,32 +48,32 @@ def render_report(receipt: dict[str, object]) -> str:
         for rule, count in counts.items()
     )
     event_rows = "".join(
-        f"""<tr class="event-row" data-event="{_escape(event['event_id'])}">
-<td>{event['step']}</td><td><code>{_escape(event['event_id'])}</code></td>
-<td><span class="op {_escape(event['kind'])}">{_escape(event['kind'])}</span></td>
-<td>{_escape(event['region'])}</td><td>{_escape(event['session'])}</td>
-<td>{_escape(event['key'])}</td><td><code>{_escape(event['observed'] or '∅')}</code></td>
-<td><code>{_escape(', '.join(cast(list[str], event['context'])) or '∅')}</code></td></tr>"""
+        f"""<tr class="event-row" data-event="{_escape(event["event_id"])}">
+<td>{event["step"]}</td><td><code>{_escape(event["event_id"])}</code></td>
+<td><span class="op {_escape(event["kind"])}">{_escape(event["kind"])}</span></td>
+<td>{_escape(event["region"])}</td><td>{_escape(event["session"])}</td>
+<td>{_escape(event["key"])}</td><td><code>{_escape(event["observed"] or "∅")}</code></td>
+<td><code>{_escape(", ".join(cast(list[str], event["context"])) or "∅")}</code></td></tr>"""
         for event in events
     )
     finding_rows = "".join(
-        f"""<tr><td><code>{_escape(finding['finding_id'])}</code></td>
-<td><span class="rule">{_escape(_RULE_LABELS[str(finding['rule'])])}</span></td>
-<td><code>{_escape(finding['at_event'])}</code></td>
-<td><code>{_escape(' → '.join(cast(list[str], finding['witness_events'])))}</code></td>
-<td>{_escape(finding['explanation'])}</td></tr>"""
+        f"""<tr><td><code>{_escape(finding["finding_id"])}</code></td>
+<td><span class="rule">{_escape(_RULE_LABELS[str(finding["rule"])])}</span></td>
+<td><code>{_escape(finding["at_event"])}</code></td>
+<td><code>{_escape(" → ".join(cast(list[str], finding["witness_events"])))}</code></td>
+<td>{_escape(finding["explanation"])}</td></tr>"""
         for finding in findings
     )
     timeline = "".join(
-        f"""<div class="tick {'bad' if any(item['at_event'] == event['event_id'] for item in findings) else 'ok'}">
-<span>{event['step']}</span><b>{_escape(event['event_id'])}</b>
-<small>{_escape(event['region'])} · {_escape(event['kind'])}</small></div>"""
+        f"""<div class="tick {"bad" if any(item['at_event"] == event["event_id"] for item in findings) else "ok"}">
+<span>{event["step"]}</span><b>{_escape(event["event_id"])}</b>
+<small>{_escape(event["region"])} · {_escape(event["kind"])}</small></div>"""
         for event in events
     )
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CausalFence · {_escape(trace['trace_id'])}</title>
+<title>CausalFence · {_escape(trace["trace_id"])}</title>
 <style>
 :root{{--ink:#14253a;--muted:#637287;--paper:#f5f7fb;--card:#fff;--navy:#0b1f35;
 --cyan:#54d6ce;--blue:#4d7df3;--red:#ef6674;--amber:#f3b64b;--line:#dfe6ef}}
@@ -106,13 +106,13 @@ footer{{color:var(--muted);font-size:12px;margin-top:24px;padding:0 6px}}
 <h1>Consistency failures,<br>made answerable.</h1>
 <p class="lead">A deterministic analysis of declared version dependencies, causal closure,
 and four client-session guarantees. Wall clocks are display metadata—not proof.</p>
-<div class="badges"><span class="badge">synthetic fixture</span><span class="badge">{summary['regions']} regions</span>
-<span class="badge">{summary['sessions']} sessions</span><span class="badge">Floyd–Warshall verifier passed</span></div></header>
+<div class="badges"><span class="badge">synthetic fixture</span><span class="badge">{summary["regions"]} regions</span>
+<span class="badge">{summary["sessions"]} sessions</span><span class="badge">Floyd–Warshall verifier passed</span></div></header>
 <main><div class="metrics">{metric_cards}</div>
 <div class="overview"><section><h2>Rule outcomes</h2><p class="sub">Finding count, not a production error rate.</p>{bars}</section>
 <section><h2>Evidence boundary</h2><p class="sub">The receipt proves deterministic replay of this bounded synthetic trace.
 It does not prove a database implementation, SLA, performance, or production correctness.</p>
-<p><strong>{summary['trace_edges']}</strong> trace edges · <strong>{summary['version_edges']}</strong> declared version edges</p></section></div>
+<p><strong>{summary["trace_edges"]}</strong> trace edges · <strong>{summary["version_edges"]}</strong> declared version edges</p></section></div>
 <section id="timeline"><h2>Incident timeline</h2><p class="sub">Red ticks have at least one bounded witness.</p>
 <div class="timeline">{timeline}</div></section>
 <section id="findings"><h2>Minimal local witnesses</h2><p class="sub">Each finding names the operation pair and missing version needed for independent replay.</p>
@@ -122,9 +122,9 @@ It does not prove a database implementation, SLA, performance, or production cor
 <div class="table-wrap"><table><thead><tr><th>Step</th><th>Event</th><th>Op</th><th>Region</th><th>Session</th><th>Key</th><th>Observed</th><th>Context</th></tr></thead>
 <tbody>{event_rows}</tbody></table></div></section>
 <section id="receipt"><h2>Receipt integrity</h2><p class="sub">Canonical SHA-256 binds the trace, analysis fields, and append-only ledger.</p>
-<div class="digest"><strong>Trace SHA-256</strong><code>{_escape(receipt['trace_sha256'])}</code>
-<strong>Ledger root</strong><code>{_escape(receipt['ledger_root_sha256'])}</code>
-<strong>Receipt SHA-256</strong><code>{_escape(receipt['receipt_sha256'])}</code></div></section>
+<div class="digest"><strong>Trace SHA-256</strong><code>{_escape(receipt["trace_sha256"])}</code>
+<strong>Ledger root</strong><code>{_escape(receipt["ledger_root_sha256"])}</code>
+<strong>Receipt SHA-256</strong><code>{_escape(receipt["receipt_sha256"])}</code></div></section>
 <footer>Generated deterministically by CausalFence v0.1.0 · no network, database, or model required.</footer>
 </main></body></html>
 """

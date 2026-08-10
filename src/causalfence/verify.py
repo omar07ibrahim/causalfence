@@ -44,7 +44,9 @@ def _finding(
     return {"finding_id": "CF-" + sha256_value(body)[:12].upper(), **body}
 
 
-def _replay(trace: Trace) -> tuple[
+def _replay(
+    trace: Trace,
+) -> tuple[
     list[dict[str, object]],
     dict[str, object],
     dict[str, object],
@@ -63,16 +65,11 @@ def _replay(trace: Trace) -> tuple[
             if reachable[source][pivot]:
                 for target in range(len(versions)):
                     reachable[source][target] = (
-                        reachable[source][target]
-                        or reachable[pivot][target]
+                        reachable[source][target] or reachable[pivot][target]
                     )
 
     ancestors = {
-        target: {
-            source
-            for source in versions
-            if reachable[index[source]][index[target]]
-        }
+        target: {source for source in versions if reachable[index[source]][index[target]]}
         for target in versions
     }
 
@@ -159,8 +156,7 @@ def _replay(trace: Trace) -> tuple[
             missing_reads = [
                 candidate
                 for candidate in prior_reads
-                if candidate.observed is not None
-                and not carries(event.context, candidate.observed)
+                if candidate.observed is not None and not carries(event.context, candidate.observed)
             ]
             if missing_reads:
                 latest_read = missing_reads[-1]
@@ -211,12 +207,9 @@ def _replay(trace: Trace) -> tuple[
     )
     relation: dict[str, object] = {
         "version_edges": [
-            {"source": source, "target": target}
-            for source, target in sorted(version_edges)
+            {"source": source, "target": target} for source, target in sorted(version_edges)
         ],
-        "version_ancestors": {
-            version: sorted(ancestors[version]) for version in sorted(versions)
-        },
+        "version_ancestors": {version: sorted(ancestors[version]) for version in sorted(versions)},
         "trace_edges": [
             {"source": source, "target": target, "kind": kind}
             for source, target, kind in trace_edges
@@ -240,12 +233,8 @@ def _replay(trace: Trace) -> tuple[
     return findings, summary, relation
 
 
-def _ledger(
-    trace: Trace, findings: list[dict[str, object]]
-) -> tuple[list[dict[str, object]], str]:
-    payloads: list[tuple[str, object]] = [
-        ("event", event.to_dict()) for event in trace.events
-    ]
+def _ledger(trace: Trace, findings: list[dict[str, object]]) -> tuple[list[dict[str, object]], str]:
+    payloads: list[tuple[str, object]] = [("event", event.to_dict()) for event in trace.events]
     payloads.extend(("finding", finding) for finding in findings)
     previous = "0" * 64
     entries: list[dict[str, object]] = []

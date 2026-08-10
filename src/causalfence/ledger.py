@@ -11,9 +11,7 @@ def build_ledger(
 ) -> tuple[list[dict[str, object]], str]:
     """Build an append-only canonical hash chain."""
 
-    payloads: list[tuple[str, object]] = [
-        ("event", event.to_dict()) for event in trace.events
-    ]
+    payloads: list[tuple[str, object]] = [("event", event.to_dict()) for event in trace.events]
     payloads.extend(("finding", finding) for finding in findings)
     previous = "0" * 64
     entries: list[dict[str, object]] = []

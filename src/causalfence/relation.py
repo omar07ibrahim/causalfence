@@ -62,11 +62,7 @@ def build_relation(trace: Trace) -> Relation:
 
     version_ancestors = {event.event_id: ancestors(event.event_id) for event in writes}
     version_edges = tuple(
-        sorted(
-            (dependency, event.event_id)
-            for event in writes
-            for dependency in event.context
-        )
+        sorted((dependency, event.event_id) for event in writes for dependency in event.context)
     )
 
     edge_set: set[tuple[str, str, str]] = set()

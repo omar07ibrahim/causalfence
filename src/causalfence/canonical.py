@@ -75,12 +75,15 @@ def pretty_json(value: object) -> str:
     """Return stable human-readable JSON with a final newline."""
 
     try:
-        return json.dumps(
-            value,
-            ensure_ascii=False,
-            indent=2,
-            sort_keys=True,
-            allow_nan=False,
-        ) + "\n"
+        return (
+            json.dumps(
+                value,
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+                allow_nan=False,
+            )
+            + "\n"
+        )
     except (TypeError, ValueError, RecursionError) as exc:
         raise ContractError("value is not JSON serializable") from exc

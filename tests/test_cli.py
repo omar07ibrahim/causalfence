@@ -37,9 +37,7 @@ def test_complete_cli_workflow(tmp_path: Path, capsys: pytest.CaptureFixture[str
     assert str(tmp_path) not in html
 
 
-def test_analyze_refuses_to_overwrite(
-    tmp_path: Path, capsys: pytest.CaptureFixture[str]
-) -> None:
+def test_analyze_refuses_to_overwrite(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     output = tmp_path / "receipt.json"
     output.write_text("occupied", encoding="utf-8")
     assert main(["analyze", str(SCENARIO), "--output", str(output)]) == 2
@@ -56,9 +54,7 @@ def test_invalid_json_returns_bounded_error(
     assert "invalid JSON document" in capsys.readouterr().err
 
 
-def test_verify_rejects_tampered_file(
-    tmp_path: Path, capsys: pytest.CaptureFixture[str]
-) -> None:
+def test_verify_rejects_tampered_file(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     source = tmp_path / "not-receipt.json"
     source.write_text('{"format":"wrong"}', encoding="utf-8")
     assert main(["verify", str(source)]) == 2
