@@ -11,7 +11,6 @@ from collections import Counter
 from typing import cast
 
 from causalfence.canonical import sha256_value
-from causalfence.engine import RECEIPT_FORMAT
 from causalfence.errors import VerificationError
 from causalfence.model import Event, Trace, parse_trace
 
@@ -23,6 +22,7 @@ _RULES = (
     "MONOTONIC_WRITES",
 )
 _EDGE_ORDER = {"session": 0, "context": 1, "read-from": 2}
+__RECEIPT_FORMAT = "causalfence.receipt.v1"
 
 
 def _finding(
@@ -268,8 +268,8 @@ def verify_receipt(document: object) -> dict[str, object]:
     if not isinstance(document, dict):
         raise VerificationError("receipt must be an object")
     receipt = cast(dict[str, object], document)
-    if receipt.get("format") != RECEIPT_FORMAT:
-        raise VerificationError(f"receipt format must be {RECEIPT_FORMAT}")
+    if receipt.get("format") != _RECEIPT_FORMAT:
+        raise VerificationError(f"receipt format must be {_RECEIPT_FORMAT}")
     try:
         trace = parse_trace(receipt["trace"])
     except (KeyError, ValueError) as exc:
@@ -278,7 +278,7 @@ def verify_receipt(document: object) -> dict[str, object]:
     findings, summary, relation = _replay(trace)
     ledger, root = _ledger(trace, findings)
     core: dict[str, object] = {
-        "format": RECEIPT_FORMAT,
+        "format": _RECEIPT_FORMAT,
         "trace": trace.to_dict(),
         "trace_sha256": sha256_value(trace.to_dict()),
         "relation": relation,
