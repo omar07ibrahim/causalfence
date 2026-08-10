@@ -23,7 +23,7 @@
       "sha256": "2586b854ecedd0a9481fa81509014fe92d41bffc35454a229f80183397d1e290"
     },
     {
-      "bytes": 286258,
+      "bytes": 286818,
       "dimensions": [
         1120,
         820
@@ -31,7 +31,7 @@
       "frames": 3,
       "media_type": "image/gif",
       "path": "docs/evidence/causalfence-demo.gif",
-      "sha256": "f078004e601d77c29e8f7ca814f30c6d0eac35caa49c68ffc21c568edbf9036f"
+      "sha256": "0c73d56d35bb37e70ae53fd00f17251bbfb61b19551ef6151eb4a7456dc9068c"
     },
     {
       "bytes": 19004,
@@ -40,14 +40,14 @@
       "sha256": "dc8f3acbca960fb01cc737c80b4896b5cfe2d0a7293d3b79f56a36e8024c1a39"
     },
     {
-      "bytes": 670721,
+      "bytes": 671384,
       "dimensions": [
         1440,
         3162
       ],
       "media_type": "image/png",
       "path": "docs/evidence/causalfence-report-full.png",
-      "sha256": "987d58cb2df95f2139cb45cba69e2277cb423ec0809937b47a65f6ba6ef90d62"
+      "sha256": "6f6415af28dc5085d8968739fc80e69ab4952a3f1b9e1e4baa4189f9bf274ba9"
     },
     {
       "bytes": 156983,
@@ -60,10 +60,10 @@
       "sha256": "69654eac54d6000f2803e70aca5849b4e2ea42a3d3c2742d5ad75316660709f3"
     },
     {
-      "bytes": 14208,
+      "bytes": 14224,
       "media_type": "text/html",
       "path": "docs/evidence/causalfence-report.html",
-      "sha256": "20d3cd80c1f803b90d64aa3bba2449b6438582aa544c11907f87b775e9c5cfee"
+      "sha256": "6df338f2df7d90869496e3dea22e737502bb851673b3dd4cb861bfe89ac556c3"
     },
     {
       "bytes": 396481,
@@ -125,8 +125,8 @@
     "violating_events": 5,
     "writes": 8
   },
-  "source_revision": "5f949803544dfa34596d793d755c24385014dabe",
-  "source_tree": "a0af365dd80f920b8819ce72addd6e53c64e2910",
+  "source_revision": "9dfc03ad33769366a7bad3098c51f626950f49bb",
+  "source_tree": "9f300c95c3c5cd3690297116a0508d326aee75b5",
   "sources": [
     {
       "bytes": 8004,
@@ -219,9 +219,9 @@
       "sha256": "57eeed74a1b5b29bbe021c5d268034a207e6db2c4484f90a4d0154d61c4f2f3f"
     },
     {
-      "bytes": 9480,
+      "bytes": 9496,
       "path": "src/causalfence/report.py",
-      "sha256": "5ca1593a7807660a25ced49a5c92c9f4d61f83edfd9a29925d53053d7938c9b8"
+      "sha256": "96adb0bc05667c87191d06f3020613e4025a8a0d8bc4889c9c33df4f710e6cb2"
     },
     {
       "bytes": 11186,
