@@ -1,0 +1,12 @@
+name: CausalFence CodeQL configuration
+
+paths:
+  - src
+  - tools
+  - tests
+
+paths-ignore:
+  - legacy
+
+queries:
+  - uses: security-extended
