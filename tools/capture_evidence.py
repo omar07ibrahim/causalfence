@@ -9,7 +9,6 @@ import hashlib
 import html
 import json
 import platform
-import shutil
 import struct
 import xml.etree.ElementTree as ET
 from collections.abc import Sequence
