@@ -1,0 +1,180 @@
+{
+  "format": "causalfence.trace.v1",
+  "trace_id": "synthetic-three-region-incident-v1",
+  "events": [
+    {
+      "event_id": "w01",
+      "step": 1,
+      "region": "us-east",
+      "session": "s-alice",
+      "kind": "write",
+      "key": "cart",
+      "observed": null,
+      "context": []
+    },
+    {
+      "event_id": "r01",
+      "step": 2,
+      "region": "us-east",
+      "session": "s-alice",
+      "kind": "read",
+      "key": "cart",
+      "observed": "w01",
+      "context": []
+    },
+    {
+      "event_id": "w02",
+      "step": 3,
+      "region": "us-east",
+      "session": "s-alice",
+      "kind": "write",
+      "key": "profile",
+      "observed": null,
+      "context": [
+        "w01"
+      ]
+    },
+    {
+      "event_id": "r02",
+      "step": 4,
+      "region": "eu-west",
+      "session": "s-bob",
+      "kind": "read",
+      "key": "profile",
+      "observed": "w02",
+      "context": [
+        "w01"
+      ]
+    },
+    {
+      "event_id": "w03",
+      "step": 5,
+      "region": "eu-west",
+      "session": "s-bob",
+      "kind": "write",
+      "key": "cart",
+      "observed": null,
+      "context": [
+        "w01",
+        "w02"
+      ]
+    },
+    {
+      "event_id": "r03",
+      "step": 6,
+      "region": "eu-west",
+      "session": "s-bob",
+      "kind": "read",
+      "key": "cart",
+      "observed": "w03",
+      "context": [
+        "w01",
+        "w02"
+      ]
+    },
+    {
+      "event_id": "r04",
+      "step": 7,
+      "region": "ap-south",
+      "session": "s-bob",
+      "kind": "read",
+      "key": "cart",
+      "observed": "w01",
+      "context": []
+    },
+    {
+      "event_id": "w04",
+      "step": 8,
+      "region": "ap-south",
+      "session": "s-bob",
+      "kind": "write",
+      "key": "coupon",
+      "observed": null,
+      "context": [
+        "w01"
+      ]
+    },
+    {
+      "event_id": "w05",
+      "step": 9,
+      "region": "us-east",
+      "session": "s-carol",
+      "kind": "write",
+      "key": "account",
+      "observed": null,
+      "context": []
+    },
+    {
+      "event_id": "r05",
+      "step": 10,
+      "region": "eu-west",
+      "session": "s-carol",
+      "kind": "read",
+      "key": "account",
+      "observed": "w05",
+      "context": []
+    },
+    {
+      "event_id": "w06",
+      "step": 11,
+      "region": "eu-west",
+      "session": "s-carol",
+      "kind": "write",
+      "key": "account",
+      "observed": null,
+      "context": []
+    },
+    {
+      "event_id": "r06",
+      "step": 12,
+      "region": "eu-west",
+      "session": "s-carol",
+      "kind": "read",
+      "key": "account",
+      "observed": null,
+      "context": []
+    },
+    {
+      "event_id": "w07",
+      "step": 13,
+      "region": "us-east",
+      "session": "s-dave",
+      "kind": "write",
+      "key": "config",
+      "observed": null,
+      "context": []
+    },
+    {
+      "event_id": "w08",
+      "step": 14,
+      "region": "eu-west",
+      "session": "s-erin",
+      "kind": "write",
+      "key": "service",
+      "observed": null,
+      "context": [
+        "w07"
+      ]
+    },
+    {
+      "event_id": "r07",
+      "step": 15,
+      "region": "eu-west",
+      "session": "s-erin",
+      "kind": "read",
+      "key": "service",
+      "observed": "w08",
+      "context": []
+    },
+    {
+      "event_id": "r08",
+      "step": 16,
+      "region": "eu-west",
+      "session": "s-erin",
+      "kind": "read",
+      "key": "config",
+      "observed": "w07",
+      "context": []
+    }
+  ]
+}

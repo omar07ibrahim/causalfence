@@ -1,0 +1,69 @@
+[build-system]
+requires = ["hatchling==1.31.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "causalfence"
+dynamic = ["version"]
+description = "Deterministic conformance receipts for causal and session guarantees in multi-region traces"
+readme = "README.md"
+requires-python = ">=3.11,<3.15"
+license = "Apache-2.0"
+authors = [
+  { name = "Omar Ibrahim", email = "31526072+omar07ibrahim@users.noreply.github.com" },
+]
+keywords = ["distributed-systems", "causal-consistency", "verification", "observability"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: System :: Distributed Computing",
+]
+
+[project.urls]
+Documentation = "https://github.com/omar07ibrahim/causalfence#readme"
+Issues = "https://github.com/omar07ibrahim/causalfence/issues"
+Repository = "https://github.com/omar07ibrahim/causalfence"
+
+[project.scripts]
+causalfence = "causalfence.cli:main"
+
+[project.optional-dependencies]
+dev = [
+  "build==1.5.0",
+  "mypy==2.3.0",
+  "pytest==9.1.1",
+  "pytest-cov==7.1.0",
+  "ruff==0.16.2",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/causalfence"]
+
+[tool.hatch.version]
+path = "src/causalfence/__init__.py"
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = ["legacy"]
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/causalfence/report.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src", "tests"]
+exclude = ["legacy"]
