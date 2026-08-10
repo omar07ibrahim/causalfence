@@ -65,7 +65,7 @@ def render_report(receipt: dict[str, object]) -> str:
         for finding in findings
     )
     timeline = "".join(
-        f"""<div class="tick {"bad" if any(item['at_event"] == event["event_id"] for item in findings) else "ok"}">
+        f"""<div class="tick {"bad" if any(item["at_event"] == event["event_id"] for item in findings) else "ok"}">
 <span>{event["step"]}</span><b>{_escape(event["event_id"])}</b>
 <small>{_escape(event["region"])} · {_escape(event["kind"])}</small></div>"""
         for event in events
