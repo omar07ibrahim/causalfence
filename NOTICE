@@ -1,0 +1,11 @@
+CausalFence
+Copyright 2026 Omar Ibrahim
+
+This product includes software developed by Omar Ibrahim and is licensed under
+the Apache License, Version 2.0.
+
+The directory legacy/dtk-lpr-2025/ is a frozen historical snapshot retained
+only for repository provenance. It is excluded from CausalFence packaging,
+testing, supported operation, and the root Apache-2.0 license grant. Rights in
+that snapshot and its referenced proprietary DTK SDK components are not
+expanded or granted by this distribution. See legacy/dtk-lpr-2025/README.md.

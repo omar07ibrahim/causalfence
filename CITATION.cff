@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If CausalFence supports your work, please cite this software."
+title: "CausalFence"
+type: software
+authors:
+  - family-names: "Ibrahim"
+    given-names: "Omar"
+    orcid: "https://orcid.org/0009-0005-9757-7981"
+repository-code: "https://github.com/omar07ibrahim/causalfence"
+url: "https://github.com/omar07ibrahim/causalfence"
+version: "0.1.0"
+date-released: "2026-08-10"
+license: "Apache-2.0"
+keywords:
+  - causal consistency
+  - distributed systems
+  - session guarantees
+  - incident response
+  - deterministic verification
+abstract: >-
+  A dependency-free conformance lab that turns bounded multi-region
+  key-value traces into deterministic witnesses, hash-chained receipts,
+  and independently replayed verification results.
