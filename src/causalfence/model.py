@@ -135,7 +135,7 @@ def parse_trace(document: object) -> Trace:
                 step=_step(value["step"], f"events[{index}].step"),
                 region=_name(value["region"], f"events[{index}].region"),
                 session=_name(value["session"], f"events[{index}].session"),
-                kind=cast(str, kind),
+                kind=kind,
                 key=_name(value["key"], f"events[{index}].key"),
                 observed=observed,
                 context=_context(value["context"], f"events[{index}].context"),

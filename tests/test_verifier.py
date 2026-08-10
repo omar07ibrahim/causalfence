@@ -64,7 +64,7 @@ def _mutate_receipt_hash(receipt: dict[str, object]) -> None:
     ],
 )
 def test_mutated_receipt_is_rejected(incident: dict[str, object], mutation: Mutation) -> None:
-    receipt = cast(dict[str, object], copy.deepcopy(analyze_document(incident)))
+    receipt = copy.deepcopy(analyze_document(incident))
     mutation(receipt)
     with pytest.raises(VerificationError, match="does not replay"):
         verify_receipt(receipt)

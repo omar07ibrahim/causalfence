@@ -55,7 +55,7 @@ def analyze(trace: Trace) -> tuple[list[dict[str, object]], dict[str, object], R
         referenced = set(event.context)
         if event.observed is not None:
             referenced.add(event.observed)
-        missing = set()
+        missing: set[str] = set()
         for version in referenced:
             missing.update(relation.version_ancestors[version] - set(event.context))
         if missing:

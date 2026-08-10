@@ -19,4 +19,4 @@ def incident() -> dict[str, object]:
 
 
 def cloned(value: dict[str, object]) -> dict[str, object]:
-    return cast(dict[str, object], copy.deepcopy(value))
+    return copy.deepcopy(value)
