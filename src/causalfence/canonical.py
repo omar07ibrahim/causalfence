@@ -6,7 +6,7 @@ import hashlib
 import json
 from collections.abc import Iterable
 from pathlib import Path
-from typing import Any, cast
+from typing import cast
 
 from causalfence.errors import ContractError
 

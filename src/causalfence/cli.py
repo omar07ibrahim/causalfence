@@ -120,7 +120,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             _inspect(arguments.receipt)
         else:
             _report(arguments.receipt, arguments.output)
-    except (CausalFenceError, OSError, ValueError) as exc:
+    except (CausalFenceError, OSError) as exc:
         print(f"causalfence: {exc}", file=sys.stderr)
         return 2
     return 0
