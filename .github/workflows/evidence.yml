@@ -27,7 +27,7 @@ jobs:
           persist-credentials: true
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Set up exact application runtime
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.14.6"
       - name: Install locked application environment
@@ -72,7 +72,7 @@ jobs:
           )
           python tools/capture_evidence.py prepare             --root "$GITHUB_WORKSPACE"             --receipt "$input/receipt.json"             --report "$input/report.html"             --cli "$input/causalfence-cli.txt"             --output-root "$RUNNER_TEMP/causalfence-evidence"
       - name: Set up exact evidence wheel downloader
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12.3"
       - name: Download hash-locked browser wheels
@@ -93,7 +93,7 @@ jobs:
               python /src/tools/capture_evidence.py verify-visuals --output-root /out/causalfence-evidence
             '
       - name: Restore exact application runtime
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.14.6"
       - name: Finalize and independently replay candidate
